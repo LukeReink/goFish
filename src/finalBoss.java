@@ -19,14 +19,14 @@ public class finalBoss {
         xspeed = 0.09F;
         yspeed = 0.3F;
         b.resize(220,220);
-        lives = 10;
+        lives = 15;
     }
 
     public void display(){
         if(lives > 0) {
             p.image(boss, xpos, ypos);
             p.fill(0);
-            p.ellipse(xpos, ypos, 10, 10);
+//          debugging:  p.ellipse(xpos, ypos, 10, 10);
             xpos += xspeed;
             ypos += yspeed;
             p.textSize(35);
@@ -37,11 +37,14 @@ public class finalBoss {
             else
                 p.fill(255, 0, 0);
             p.text(lives, xpos + 75, ypos + 75);
+            if(ypos >= 600){
+                yspeed = 6;
+            }
             }
         }
 
     public boolean intersect(float x, float y){
-        if(x >= xpos && x <= xpos + 220 && y >= ypos && y <= ypos + 205)
+        if(x >= xpos && x <= xpos + 300 && y >= ypos && y <= ypos + 205)
             return true;
         return false;
     }

@@ -1,8 +1,6 @@
 
 import processing.core.PApplet;
 
-import java.util.ArrayList;
-
 import processing.core.PImage;
 
 public class harpoon extends PApplet{
@@ -40,11 +38,11 @@ public class harpoon extends PApplet{
         //on event press the harpoon is released
         if(p.keyPressed && !released) {
             //harpoon count -1
-            jackluke.harpoonCount--;
+            goFishGame.harpoonCount--;
             //give boolean
-            jackluke.harpoonShot = true;
+            goFishGame.harpoonShot = true;
             //set time
-            jackluke.timeCurrentforAddFish = p.millis();
+            goFishGame.timeCurrentforAddFish = p.millis();
             released = true;
         }
         //upon release
@@ -63,9 +61,9 @@ public class harpoon extends PApplet{
     //param y: ypos of object you are checking intersect with
     public boolean intersect(float x, float y){
         //if intersecting with a fish object return true
-        p.fill(255);
-        p.ellipse(xpos, ypos, 10, 10);
-        if(ypos <= y + 35 && ypos >= y  - 25 && xpos <= x + 42  && xpos >= x-20)
+//        p.fill(255);
+//        p.ellipse(xpos, ypos, 10, 10);
+        if(ypos <= y + 35 && ypos >= y  - 25 && xpos <= x + 42  && xpos >= x-35)
             return true;
         return false;
     }

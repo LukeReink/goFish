@@ -49,11 +49,11 @@ public class harpoonFal {
                 yS *= -0.75;
             }
             p.popMatrix();
-                if(jackluke.h.intersect(xpos,ypos)){
+                if(goFishGame.h.intersect(xpos,ypos + 20)){
                     p.fill(0);
                     p.textSize(30);
                     p.text("+1", xpos, ypos);
-                    jackluke.harpoonCount++;
+                    goFishGame.harpoonCount++;
                     alive = false;
                 }
             if(p.millis() - timeAlive >= 9500)

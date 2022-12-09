@@ -79,11 +79,11 @@ public class fish extends PApplet {
         theta += 0.01;
         //offset for nemo
         if(fishNum != 1)
-            p.image(f, -40,-30);
+            p.image(f, -40,-20);
         else
-            p.image(f, -60, -45);
-        p.fill(0);
-        p.ellipse(0, 0, 10, 10);
+            p.image(f, -60, -40);
+//        p.fill(0);
+//        p.ellipse(0, 0, 10, 10);
         p.translate(-xpos,-ypos);
         p.popMatrix();
     }

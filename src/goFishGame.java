@@ -4,12 +4,10 @@ import java.util.ArrayList;
 
 import processing.core.PImage;
 
-import processing.core.PMatrix3D;
-
-public class jackluke extends PApplet {
+public class goFishGame extends PApplet {
 
     public static void main(String[] args) {
-        PApplet.main("jackluke");
+        PApplet.main("goFishGame");
     }
 
     static harpoon h;
@@ -47,7 +45,7 @@ public class jackluke extends PApplet {
     PImage finalBoss;
 
     boolean finalBossinPlay = false;
-    float coolDownForAddFish = 600;
+    float coolDownForAddFish = 450;
 
     static float timeCurrentforAddFish = 0;
     //how frequently a fish spawns
@@ -55,7 +53,7 @@ public class jackluke extends PApplet {
 
     float previousTime = 0;
 
-    int numToCheck4FishKilled = 10;
+    int numToCheck4FishKilled = 15;
 
     ArrayList<PImage> fishImages = new ArrayList<>();
 
@@ -68,7 +66,6 @@ public class jackluke extends PApplet {
     int numRareFishKilled = 0;
 
     PImage blood;
-
     finalBoss boss;
 
     public void settings() {
@@ -166,10 +163,9 @@ public class jackluke extends PApplet {
                         gOver = true;
                     fill(0);
                     textSize(30);
-                    text("Harpoon Count: " + harpoonCount, 650, 50);
-                    if(!finalBossinPlay)
-                        text("Fish To Final Boss " + (numToCheck4FishKilled - numFishKilled), 625, 80);
-                    text("Fish Killed: " + numFishKilled, 60, 120);
+                    text("Harpoon Count: " + harpoonCount, 625, 50);
+                    if(!finalBossinPlay) text("Fish To Final Boss: " + (numToCheck4FishKilled - numFishKilled + 1), 625, 100);
+                    text("Fish Killed: " + numFishKilled, 20, 120);
                     text("Rare Fish Killed: " + numRareFishKilled, 20, 170);
                     if(finalBossinPlay)
                         difficultyTime = 2500;
@@ -209,14 +205,17 @@ public class jackluke extends PApplet {
                                 harpoonFal hF = new harpoonFal(this, random(boss.ypos, boss.ypos+50), random(boss.xpos, boss.xpos + 80));
                                 harpoonFals.add(hF);
                             }
+                            harpoonCount += 8;
 //                            fill(0);
 //                            textSize(30);
 //                            text("+10!", 700, 50);
 //                            harpoonCount += 10;
                             finalBossinPlay = false;
                         }
-                        if(boss.ypos >= height - 220)
+                        if(boss.ypos >= height - 150) {
+                            finalBossinPlay = false;
                             gOver = true;
+                        }
                     }
                     for (harpoonFal harpoonFal : harpoonFals) {
                         harpoonFal.display();
@@ -286,10 +285,10 @@ public class jackluke extends PApplet {
             image(underwater, 0, 0);
             fill(0);
             textSize(30);
-            text("Harpoon Count: " + harpoonCount, 650, 50);
-            text("Fish To Final Boss " + (numToCheck4FishKilled - numFishKilled), 625, 80);
-            text("Fish Killed: " + numFishKilled, 60, 50);
-            text("Rare Fish Killed: " + numRareFishKilled, 20, 85);
+            text("Harpoon Count: " + harpoonCount, 625, 50);
+            text("Fish To Final Boss: " + (numToCheck4FishKilled - numFishKilled + 1), 625, 100);
+            text("Fish Killed: " + numFishKilled, 20, 50);
+            text("Rare Fish Killed: " + numRareFishKilled, 20, 100);
             fill(255,0,0);
             textSize(125);
             text("Game Over!", 160, 300);
@@ -300,6 +299,12 @@ public class jackluke extends PApplet {
                 numFishKilled = 0;
                 lives = 3;
                 difficultyTime = 3000;
+                numToCheck4FishKilled = 15;
+                finalBossinPlay = false;
+                boss.ypos = 0;
+                boss.lives = 20;
+                for(harpoonFal fal : harpoonFals)
+                    fal.timeAlive -= 8500;
                 gOver = false;
             }
 
